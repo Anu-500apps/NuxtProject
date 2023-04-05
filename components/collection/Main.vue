@@ -16,7 +16,7 @@
       <div>
         <div
           v-for="(templates,index) in templateData"
-          :key="index"
+          :key="templates"
           class="border p-4 rounded-md mb-3 shadow-sm bg-white"
         >
           <section>
@@ -162,13 +162,12 @@ const update =async(templates)=>{
       `"https://v1-orm-lib.mars.hipso.cc/email-templates/${form.id}"`,
       options
     );
-  //   console.log("addTemplateData>>>>>>>>>.",addTemplateData)
 };
 
 const deleteTemplates = async (data,index) => {
-  console.log("data>>>>>>>>>>>",data)
+  console.log("data,index",data,index)
   await useAuthLazyFetchDelete(
-    `https://v1-orm-lib.mars.hipso.cc/email-templates/${data}`,
+    `https://v1-orm-lib.mars.hipso.cc/email-templates/${index}`,
   )
   templateData.value.splice(index, 1)
 }
