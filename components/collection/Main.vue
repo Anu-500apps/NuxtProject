@@ -151,7 +151,6 @@ const edit = async (templates) => {
   //     method: "PUT",
   //     headers: {
   //       "Content-Type": "application/json",
-  
   //       Accept: "application/json",
   //       Authorization:
   //         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1IjoiZDI1NjgxM2E2NjdjNDExM2ExZDBiNDY2NGI4YmRhNzUiLCJkIjoiMTY4MDA3OCIsInIiOiJzYSIsInAiOiJmcmVlIiwiYSI6ImZpbmRlci5pbyIsImwiOiJ1czEiLCJleHAiOjE2ODMyNzY5MTR9.ESaiQVZYh45IyIJaP4A3YZO73FRLxd_lW1ATays2dhM",
