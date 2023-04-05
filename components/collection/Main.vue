@@ -15,8 +15,8 @@
       </div>
       <div>
         <div
-          v-for="templates in templateData"
-          :key="templates.name"
+          v-for="(templates,index) in templateData"
+          :key="index"
           class="border p-4 rounded-md mb-3 shadow-sm bg-white"
         >
           <section>
@@ -26,7 +26,7 @@
               templates.body
             }}</span>
           </section>
-          <collectionList @edit="edit(templates)"></collectionList>
+          <collectionList @edit="edit(templates)" @delete="deleteTemplates(templates,index)"></collectionList>
         </div>
       </div>
     </div>
@@ -84,7 +84,7 @@
           <button
             type="button"
             class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            @click="submit()"
+            @click="templates ? update(templates) : submit()"
           >
             Save
           </button>
@@ -146,28 +146,31 @@ const edit = async (templates) => {
   form.value.name = templates.name;
   form.value.subject = templates.subject;
   form.value.body = templates.body;
-  console.log("forrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",form)
-  //      let options = {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //       Authorization:
-  //         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1IjoiZDI1NjgxM2E2NjdjNDExM2ExZDBiNDY2NGI4YmRhNzUiLCJkIjoiMTY4MDA3OCIsInIiOiJzYSIsInAiOiJmcmVlIiwiYSI6ImZpbmRlci5pbyIsImwiOiJ1czEiLCJleHAiOjE2ODMyNzY5MTR9.ESaiQVZYh45IyIJaP4A3YZO73FRLxd_lW1ATays2dhM",
-  //     },
-  //       body: form,
-  //   };
-  //  const { data: addTemplateData } = await useAuthLazyFetchPut(
-  //     `"https://v1-orm-lib.mars.hipso.cc/email-templates/${form.id}"`,
-  //     options
-  //   );
+}
+const update =async(templates)=>{
+ let options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1IjoiZDI1NjgxM2E2NjdjNDExM2ExZDBiNDY2NGI4YmRhNzUiLCJkIjoiMTY4MDA3OCIsInIiOiJzYSIsInAiOiJmcmVlIiwiYSI6ImZpbmRlci5pbyIsImwiOiJ1czEiLCJleHAiOjE2ODMyNzY5MTR9.ESaiQVZYh45IyIJaP4A3YZO73FRLxd_lW1ATays2dhM",
+      },
+        body: form,
+    };
+   const { data: addTemplateData } = await useAuthLazyFetchPut(
+      `"https://v1-orm-lib.mars.hipso.cc/email-templates/${form.id}"`,
+      options
+    );
   //   console.log("addTemplateData>>>>>>>>>.",addTemplateData)
 };
-// const post_call = (form) => {
-//   template_data.value = form.template_name;
-//   template_subject.value = form.subject;
-//   template_text.value = form.text;
-//   validate.value = false;
-// };
+
+const deleteTemplates = async (data,index) => {
+  console.log("data>>>>>>>>>>>",data)
+  await useAuthLazyFetchDelete(
+    `https://v1-orm-lib.mars.hipso.cc/email-templates/${data}`,
+  )
+  templateData.value.splice(index, 1)
+}
 // post_call();
 </script>

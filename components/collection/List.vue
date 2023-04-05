@@ -1,6 +1,6 @@
 <template>
-     <collectionAdd @delete="emits('delete')"></collectionAdd>
-    <collectionEdit @edit="emits('edit')"></collectionEdit>
+     <collectionAdd ></collectionAdd>
+    <collectionEdit @edit="emits('edit')" @delete="emits('delete')"></collectionEdit>
 </template>
 <script setup lang="ts">
 import {defineEmits} from 'vue'
